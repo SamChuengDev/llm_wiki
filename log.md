@@ -5,6 +5,12 @@
 
 ---
 
+## [2026-04-11] lint | health check
+- **扫描**: 6 wiki 页面 + index.md, 共 7 项检查
+- **发现**: 15 个问题 (8 死链/缺页, 2 交叉引用不对称, 5 缺 frontmatter)
+- **自动修复**: 7 个 (5 index 页补 frontmatter, 1 占位死链删除, 1 交叉引用修复)
+- **待人工**: 8 个缺页 (规划型链接，待日后 Ingest 填充)
+
 ## [2026-04-11] ingest | VLM RL logprobs_diff 发散根因分析
 - **来源**: 本地工作汇报 (`vlm_rl_root_cause_analysis.md`)
 - **提取点 1**: 定位因推理引擎底层的防错篡改，导致 RL 流程中特殊 token `-100` 全部变成 `1` 的幽灵 Bug。

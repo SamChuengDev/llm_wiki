@@ -1,3 +1,12 @@
+---
+title: "框架适配 (Frameworks)"
+tags: [category/framework]
+last_updated: 2026-04-11
+source: []
+confidence: high
+status: active
+---
+
 # 04 框架特有逻辑 (Frameworks)
 
 本章节记录 vLLM, Megatron, DeepSpeed 等框架在 NPU 上的适配细节。

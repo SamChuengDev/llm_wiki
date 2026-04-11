@@ -1,3 +1,12 @@
+---
+title: "算子迁移 (Operators)"
+tags: [category/operator]
+last_updated: 2026-04-11
+source: []
+confidence: high
+status: active
+---
+
 # 01 算子迁移 (Operators)
 
 本章节记录 GPU (CUDA) 到 NPU (CANN) 的算子映射经验与坑。

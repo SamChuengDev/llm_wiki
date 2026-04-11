@@ -44,5 +44,7 @@ contradictions: []
 - **`logprobs_diff` 收缩**: 断崖式收敛至 `0.0204`，达到了纯文本的安全训练标准。
 
 ## 5. 关联知识
-- [[wiki/00_bugfix/index|环境启动与多进程异常排查]]
+- [[wiki/02_precision/index|精度对齐目录]]
+- [[wiki/04_frameworks/index|框架适配 (vLLM-Ascend)]]
 - 本案表明：多模态 RL 联合部署时，底层加速引擎（如 vLLM-Ascend）的 Token 静默强转操作极易引发分布式精度塌陷。
+
