@@ -18,15 +18,16 @@
 git submodule add https://github.com/SamChuengDev/llm_wiki.git projects/llm_wiki
 ```
 
-**⚠️ 唤醒快捷工作流（关键步骤）**：
-由于 Antigravity IDE 默认只扫描主项目根目录下的 `.agents/workflows/` 寻找快捷指令。为了能在主项目中直接敲出 `/Ingest Bugfix` 斜杠命令，您**不需要拷贝文件（以免破坏版本控制的双向同步）**，而是建议**建立软链接 (Symlink)**：
+**✅ 最稳健的做法：注册为全局工作流 (Global Workflows)**
+与其在主项目中建立软链接（某些基于监听的 IDE 文件系统可能会安全忽略软链），**最无缝且在任意项目中都能调用的方式**是直接将其软链接到 Antigravity IDE 的全局配置目录下：
 
 ```bash
-mkdir -p .agents/workflows
-ln -s projects/llm_wiki/.agents/workflows/ingest-bugfix.md .agents/workflows/ingest-bugfix.md
-ln -s projects/llm_wiki/.agents/workflows/ingest-tuning.md .agents/workflows/ingest-tuning.md
-ln -s projects/llm_wiki/.agents/workflows/ingest-precision.md .agents/workflows/ingest-precision.md
+mkdir -p ~/.gemini/antigravity/global_workflows
+ln -s ~/codes/llm_wiki/.agents/workflows/ingest-bugfix.md ~/.gemini/antigravity/global_workflows/ingest-bugfix.md
+ln -s ~/codes/llm_wiki/.agents/workflows/ingest-tuning.md ~/.gemini/antigravity/global_workflows/ingest-tuning.md
+ln -s ~/codes/llm_wiki/.agents/workflows/ingest-precision.md ~/.gemini/antigravity/global_workflows/ingest-precision.md
 ```
+*执行上述命令后，无需区分所在项目，您均可随时通过 `/ingest` 斜杠命令直接唤醒图谱分析。*
 
 ## 🛠️ AI Agent 交互
 
