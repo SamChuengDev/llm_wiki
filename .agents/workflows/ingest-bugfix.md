@@ -2,8 +2,9 @@
 
 This workflow extracts error/bugfix experience from a raw log or user description, and creates a structured knowledge entry in the Wiki.
 
-1. **Read Raw Data**: 
-   - Parse the target file in the `raw/` directory (e.g. `raw/error_log.txt`).
+1. **Context Extraction (Submodule Aware)**: 
+   - Gather context primarily from the current conversation history (e.g., recent Agent PR logs and debugging turns in the main repository) OR a provided target file in the `raw/` directory.
+   - Ensure all file paths for reading/writing represent the `llm_wiki` submodule directory.
 2. **Analyze the Bug**: 
    - Extract the environment setup (e.g., CANN version, framework).
    - Extract the core error message or stack trace.

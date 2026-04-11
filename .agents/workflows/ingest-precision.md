@@ -2,8 +2,9 @@
 
 This workflow guides the agent to document precision alignment issues like NaN occurrences, overflows, or output deviations compared to a baseline (e.g., GPU).
 
-1. **Read Alignment Data**: 
-   - Parse the relevant log, debug trace, or forum discussion from the `raw/` folder.
+1. **Context Extraction (Submodule Aware)**: 
+   - Gather precision alignment context from the current Agent conversation history (iterative debug steps in the main workspace) OR a provided file in the `raw/` folder.
+   - Ensure all wiki updates are targeted to the `llm_wiki` submodule directory.
 2. **Isolate the Issue**: 
    - Identify the specific layer/operator causing the deviation (e.g., `RMSNorm`, Attention block).
    - Identify the precision format in use (FP16, BF16, FP32).

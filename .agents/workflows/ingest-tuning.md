@@ -2,8 +2,9 @@
 
 This workflow directs the agent to extract performance tuning insights from raw profiling data, profiling summaries, or optimization discussions.
 
-1. **Analyze Target Data**: 
-   - Read the raw optimization notes or profiling summary in `raw/`.
+1. **Context Extraction (Submodule Aware)**: 
+   - Formulate the tuning experience based on recent conversation history (the iterative optimization steps just executed by the Agent in the main workspace) OR a profiling summary in `raw/`.
+   - Guarantee you write the resulting docs into the correct `llm_wiki` submodule path.
 2. **Extract Key Metrics**: 
    - Identify the baseline performance (e.g., token throughput, iteration time).
    - Identify the optimized performance.
