@@ -5,6 +5,11 @@
 
 ---
 
+## [2026-04-11] ingest | xLLM 环境映射机制与 veturborpc 拦截
+- **来源**: 本地推演 (`srv_dp16ep16.sh` 及日志)
+- **提取点 1**: 追踪并记录了 `veturborpc` 报错的根本原因是单 rank 的 Companion 服务隐式继承了 Launcher 的全局 RPC 配置。
+- **提取点 2**: 明确了利用 `XLLM_ENCODER_METHOD` 而非 `REMOTE_EXECUTOR_METHOD` 来绕过 `InferencerConfig` 强校验的方法。
+
 ## [2026-04-11] lint | health check
 - **扫描**: 6 wiki 页面 + index.md, 共 7 项检查
 - **发现**: 15 个问题 (8 死链/缺页, 2 交叉引用不对称, 5 缺 frontmatter)
