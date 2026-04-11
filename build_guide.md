@@ -11,10 +11,11 @@
 
 - `raw/` : **【只读】** 原始资料区。包含我提供的官方文档（如 CANN 手册）、论坛踩坑贴、错误日志（Log）、Profiling 结果。你**绝不能**修改此目录下的文件，只能读取。
 - `wiki/` : **【全权管理】** 提炼后的知识库。由你负责创建、更新和分类。
-  - `wiki/operators/` : 算子映射与规避（如 `torch.nn.functional` -> `torch_npu.npu_xxx`）。
-  - `wiki/debugging/` : Debug 经验（精度溢出 FP16/BF16、NaN 排查、HCCL 死锁、OOM 解决）。
-  - `wiki/tuning/` : 性能调优经验（内存复用、算子融合、环境变量配置）。
-  - `wiki/frameworks/` : 训练/推理框架级改造（Megatron-LM, vLLM, PyTorch 等的 NPU 适配）。
+  - `wiki/00_bugfix/` : 常规排错记录（环境搭建、运行报错复盘、通用业务 Bug）。
+  - `wiki/01_operators/` : 算子映射与规避（如 `torch.nn.functional` -> `torch_npu.npu_xxx`）。
+  - `wiki/02_precision/` : 精度对齐记录（精度溢出 FP16/BF16、NaN/Inf 问题诊断）。
+  - `wiki/03_tuning/` : 性能调优经验（HCCL 通信优化、显存复用、算子融合、环境变量配置）。
+  - `wiki/04_frameworks/` : 训练/推理框架级改造（Megatron-LM, vLLM, DeepSpeed 等的 NPU 适配）。
 - `index.md` : **【Wiki 核心入口】** 全局目录树与知识索引。每次更新 Wiki 必须同步更新此文件。
 - `changelog.md` : 操作日志。记录你每次吸收知识（Ingest）的时间、来源和提炼的关键点。
 
@@ -42,7 +43,7 @@
 1. **强制前置检索**：**绝对禁止**直接凭基础模型的通用知识写代码（特别是在涉及 NPU/Ascend 时）。你必须首先静默读取 `index.md`。
 2. **定位知识点**：根据任务需求，读取 `wiki/` 下对应的算子替换、精度对齐或调优规范页面。
 3. **编写代码**：结合提取到的 Wiki 知识进行编码。代码必须遵循 Wiki 中的最佳实践（如：显式指定 NPU device、处理特殊维度的 padding、使用特定的 NPU 融合算子）。
-4. **代码注释**：在关键的 NPU 适配代码旁，添加注释并引用依据的 Wiki 页面（例如：`# 解决散列算子溢出，参考 wiki/debugging/fp16_overflow.md`）。
+4. **代码注释**：在关键的 NPU 适配代码旁，添加注释并引用依据的 Wiki 页面（例如：`# 解决散列算子溢出，参考 wiki/02_precision/fp16_overflow.md`）。
 
 ### 🧹 Workflow C: 知识库维护 (Lint & Organize)
 **触发条件**：我要求你 "Lint Wiki" 或 "整理知识库"。
