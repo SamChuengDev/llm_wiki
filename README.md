@@ -21,3 +21,9 @@ git submodule add <repository_url> projects/<project_name>
 ## 🛠️ AI Agent 交互
 
 本项目深度集成了 AI Agent 指令。当使用 Antigravity IDE 时，Agent 会自动遵循目录规范，通过 `Ingest` 流程吸收新知识，并通过 `Vibe Coding` 流程产出高质量的 Infra 代码。
+
+**预置的 Agent Workflows:**
+您可以在 `/workflows>` 界面直接触发（或输入对应斜杠命令）：
+- **Ingest Bugfix** 开发 / 排错经验吸收 (`.agents/workflows/ingest-bugfix.md`)
+- **Ingest Tuning** 性能调优分析与指导生成 (`.agents/workflows/ingest-tuning.md`)
+- **Ingest Precision** 精度对齐步骤总结 (`.agents/workflows/ingest-precision.md`)
