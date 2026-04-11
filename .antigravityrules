@@ -11,6 +11,7 @@
 
 - `raw/` : **【只读】** 原始资料区。包含我提供的官方文档（如 CANN 手册）、论坛踩坑贴、错误日志（Log）、Profiling 结果。你**绝不能**修改此目录下的文件，只能读取。
 - `wiki/` : **【全权管理】** 提炼后的知识库。由你负责创建、更新和分类。
+  - `wiki/00_bugfix/` : 常规排错记录（环境搭建、运行报错复盘、通用业务 Bug）。
   - `wiki/01_operators/` : 算子映射与规避（如 `torch.nn.functional` -> `torch_npu.npu_xxx`）。
   - `wiki/02_precision/` : Debug 经验（精度溢出 FP16/BF16、NaN 排查、HCCL 死锁、OOM 解决）。
   - `wiki/03_tuning/` : 性能调优经验（内存复用、算子融合、环境变量配置）。

@@ -6,6 +6,10 @@
 
 ## 🏛️ 知识目录
 
+### 0. [[wiki/00_bugfix/index|常规排错 (Bugfix)]]
+- 日常环境异常与框架启动报错
+- 业务逻辑层的 Bug 修复复盘与 Workaround
+
 ### 1. [[wiki/01_operators/index|算子迁移 (Operators)]]
 - GPU (CUDA) -> NPU (CANN) 算子映射表
 - 算子规避与自定义算子实现

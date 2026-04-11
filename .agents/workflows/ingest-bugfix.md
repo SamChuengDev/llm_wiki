@@ -13,7 +13,7 @@
    - 使用 `templates/bugfix_template.md` 将提取的经验进行规范化排版。
    - 务必完整填写 Markdown 顶部的 YAML 元数据。
 4. **归档至 Wiki**: 
-   - 将格式化后的文档保存至相关的维基目录下（如 `wiki/01_operators/` 算子报错，或 `wiki/02_precision/` 精度报错），并确保文件名表意清晰（例如 `wiki/02_precision/attn_fp16_overflow.md`）。
+   - 将格式化后的文档默认保存至 `wiki/00_bugfix/` 目录下（如果是非常明确的精度报错或独立算子报错，也可按需存入其他目录），并确保文件名表意清晰（例如 `wiki/00_bugfix/cann_init_crash.md`）。
 5. **更新索引与日志**: 
    - 在 `index.md` 中对应的分类下添加指向新生成的知识条目的双向链接 `[[WikiLink]]`。
    - 在 `changelog.md` 顶部追加一条相关的操作日志，宣告该经验吸收完毕。
