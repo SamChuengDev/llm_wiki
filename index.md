@@ -16,6 +16,7 @@
 - `torch_npu` 特有算子库
 
 ### 2. [[wiki/02_precision/index|精度对齐 (Precision)]]
+- [[wiki/02_precision/vlm_rl_actor_blind_diff|VLM RL 架构级概率不一致发散 (XLLM -100 Token 丢失)]]
 - FP16/BF16 溢出排查
 - NaN/Inf 问题诊断
 - 逐层结果对齐工具与方法
