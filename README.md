@@ -10,12 +10,22 @@
 - **`raw/`**: 原始资料收集区。
 - **`templates/`**: 规范化沉淀模板。
 
-## 📦 Submodule 挂载指南
+## 📦 Submodule 挂载指南与 Workflow 激活
 
-如果需要挂载外部项目作为子模块进行分析：
+配置当前 `llm_wiki` 仓库为主项目的子模块：
 
 ```bash
-git submodule add <repository_url> projects/<project_name>
+git submodule add https://github.com/SamChuengDev/llm_wiki.git projects/llm_wiki
+```
+
+**⚠️ 唤醒快捷工作流（关键步骤）**：
+由于 Antigravity IDE 默认只扫描主项目根目录下的 `.agents/workflows/` 寻找快捷指令。为了能在主项目中直接敲出 `/Ingest Bugfix` 斜杠命令，您**不需要拷贝文件（以免破坏版本控制的双向同步）**，而是建议**建立软链接 (Symlink)**：
+
+```bash
+mkdir -p .agents/workflows
+ln -s projects/llm_wiki/.agents/workflows/ingest-bugfix.md .agents/workflows/ingest-bugfix.md
+ln -s projects/llm_wiki/.agents/workflows/ingest-tuning.md .agents/workflows/ingest-tuning.md
+ln -s projects/llm_wiki/.agents/workflows/ingest-precision.md .agents/workflows/ingest-precision.md
 ```
 
 ## 🛠️ AI Agent 交互
