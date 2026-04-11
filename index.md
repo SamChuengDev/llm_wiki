@@ -1,6 +1,7 @@
 # Map of Content (知识入口)
 
 欢迎来到 LLM-WIKI。这里是异构计算 Infra 知识的索引核心。
+LLM 在执行 Query 时应首先读取本文件定位相关页面。
 
 ---
 
@@ -34,6 +35,26 @@
 
 ---
 
+## ⚙️ 操作指南
+
+本 Wiki 遵循 [Karpathy llm-wiki 模式](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)，核心操作有三种：
+
+| 操作 | 触发方式 | 说明 |
+|------|---------|------|
+| **Ingest** | `/ingest-bugfix`, `/ingest-precision`, `/ingest-tuning` | 吸收新的原始资料，提炼为 wiki 页面 |
+| **Query** | `/query-wiki` 或直接提问 | 基于 wiki 知识回答问题，有价值的回答回写 |
+| **Lint** | `/lint-wiki` | 健康检查：死链、孤立页、矛盾、陈旧、缺页 |
+
+---
+
+## 📋 日志与索引
+
+- [[log|操作时间线]] — 按时间倒序记录所有 Ingest/Query/Lint 操作
+- 快速查看最近操作: `grep "^## \[" log.md | tail -5`
+
+---
+
 ## 🕒 最近更新
 
-- [[changelog|查看完整更新日志]]
+- `[2026-04-11]` 精度对齐: [[wiki/02_precision/vlm_rl_actor_blind_diff|VLM RL logprobs_diff 发散根因]]
+- `[2026-04-11]` 初始架构构建

@@ -3,6 +3,11 @@ title: "Precision: [精度问题简述]"
 tags: [status/resolved, category/nan|overflow|diff]
 last_updated: YYYY-MM-DD
 source: [raw/docs/xxx.md]
+confidence: high
+status: active
+open_questions:
+  - "待补充的疑点"
+contradictions: []
 ---
 
 # Precision Alignment Report: [对齐项标题]

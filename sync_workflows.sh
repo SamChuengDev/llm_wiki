@@ -7,5 +7,10 @@ echo "🔄 Syncing LLM-WIKI workflows to global directory: $GLOBAL_DIR"
 
 mkdir -p "$GLOBAL_DIR"
 cp -f .agents/workflows/ingest-*.md "$GLOBAL_DIR/"
+cp -f .agents/workflows/query-*.md "$GLOBAL_DIR/"
+cp -f .agents/workflows/lint-*.md "$GLOBAL_DIR/"
 
-echo "✅ Sync complete! Please type '/' in your Antigravity IDE to verify."
+echo "✅ Sync complete! Available workflows:"
+ls -1 "$GLOBAL_DIR"/*.md 2>/dev/null | xargs -I{} basename {}
+echo ""
+echo "Please type '/' in your Antigravity IDE to verify."

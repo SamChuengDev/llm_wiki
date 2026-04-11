@@ -3,6 +3,11 @@ title: "Tuning: [优化项简述]"
 tags: [status/verified, category/memory|compute|comm]
 last_updated: YYYY-MM-DD
 source: [raw/docs/xxx.md]
+confidence: high
+status: active
+open_questions:
+  - "待补充的疑点"
+contradictions: []
 ---
 
 # Profiling & Tuning Report: [优化项标题]

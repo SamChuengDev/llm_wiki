@@ -2,13 +2,38 @@
 
 本项目是一个专门针对大模型在异构硬件（如华为 Ascend NPU）上的迁移、适配、调优与 Debug 的知识库。
 
-## 🚀 核心架构
+> 📖 基于 [Karpathy llm-wiki 模式](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)构建：知识不是每次从原始文档重新推导，而是被 LLM **编译一次、持续维护**的复利型知识资产。
 
-- **`.antigravityrules`**: 赋予 AI Agent (Antigravity) 首席架构师角色，定义知识处理流。
-- **`index.md`**: 知识图谱入口 (Map of Content)。
-- **`wiki/`**: 核心知识区，包含算子映射、精度对齐、性能调优等。
-- **`raw/`**: 原始资料收集区。
-- **`templates/`**: 规范化沉淀模板。
+## 🏗️ 三层架构
+
+| 层级 | 目录 | 角色 | 所有权 |
+|------|------|------|--------|
+| **Raw Sources** | `raw/` | 不可变的原始资料（日志、Profiling、文档） | 人类写入，LLM 只读 |
+| **Wiki** | `wiki/` | 提炼后的结构化知识库 | LLM 全权管理 |
+| **Schema** | `.antigravityrules` | 定义结构、约定、操作流 | 人类 + LLM 共同演进 |
+
+**导航文件**:
+- `index.md` — 知识图谱入口 (Map of Content)，LLM 查询知识的起点
+- `log.md` — 时间线操作日志，支持 `grep "^## \[" log.md | tail -5` 快速检索
+
+## ⚙️ 三大核心操作
+
+| 操作 | Workflow | 说明 |
+|------|----------|------|
+| **Ingest** | `/ingest-bugfix`, `/ingest-precision`, `/ingest-tuning` | 吸收新资料，提炼为 wiki 页面 |
+| **Query** | `/query-wiki` | 基于 wiki 知识回答问题，有价值的回答回写 wiki |
+| **Lint** | `/lint-wiki` | 健康检查：死链、孤立页、矛盾、陈旧、缺页 |
+
+## 📂 Wiki 分类
+
+```
+wiki/
+├── 00_bugfix/       # 环境异常与排错记录
+├── 01_operators/    # GPU→NPU 算子映射与规避
+├── 02_precision/    # 精度对齐（FP16/BF16 溢出、NaN 排查）
+├── 03_tuning/       # 性能调优（HCCL、显存、算子融合）
+└── 04_frameworks/   # 框架适配（vLLM、Megatron-LM、DeepSpeed）
+```
 
 ## 📦 Submodule 挂载指南与 Workflow 激活
 
@@ -28,13 +53,3 @@ chmod +x sync_workflows.sh
 ./sync_workflows.sh
 ```
 *执行上述脚本后，底层引擎会把最新的提取流推送到 `~/.gemini/antigravity/global_workflows/` 下。无需重启，轻敲 `/` 即可立刻唤醒 `Ingest Bugfix` 等命令。由于是硬拷贝，未来如果您微调了规则，需要重新执行一次该脚本。*
-
-## 🛠️ AI Agent 交互
-
-本项目深度集成了 AI Agent 指令。当使用 Antigravity IDE 时，Agent 会自动遵循目录规范，通过 `Ingest` 流程吸收新知识，并通过 `Vibe Coding` 流程产出高质量的 Infra 代码。
-
-**预置的 Agent Workflows:**
-您可以在 `/workflows>` 界面直接触发（或输入对应斜杠命令）：
-- **Ingest Bugfix** 开发 / 排错经验吸收 (`.agents/workflows/ingest-bugfix.md`)
-- **Ingest Tuning** 性能调优分析与指导生成 (`.agents/workflows/ingest-tuning.md`)
-- **Ingest Precision** 精度对齐步骤总结 (`.agents/workflows/ingest-precision.md`)

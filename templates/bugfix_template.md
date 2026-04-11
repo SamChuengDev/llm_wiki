@@ -3,6 +3,11 @@ title: "Bugfix: [报错简述]"
 tags: [status/investigating, priority/high, category/overflow]
 last_updated: YYYY-MM-DD
 source: [raw/logs/xxx.log]
+confidence: medium
+status: active
+open_questions:
+  - "待补充的疑点"
+contradictions: []
 ---
 
 # Bugfix Report: [问题标题]

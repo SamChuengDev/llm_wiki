@@ -3,6 +3,10 @@ title: "Precision: VLM RL Actor 概率输出不一致 (The Missing -100)"
 tags: [status/resolved, category/diff, module/xllm, module/rl]
 last_updated: 2026-04-11
 source: [/Users/samcheung/codes/work_summary/强化学习/mass_engine/vlm_rl_root_cause_analysis.md]
+confidence: high
+status: active
+open_questions: []
+contradictions: []
 ---
 
 # Precision Alignment Report: VLM RL `logprobs_diff` 发散根因排查
