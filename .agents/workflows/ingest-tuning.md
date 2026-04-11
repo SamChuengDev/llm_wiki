@@ -1,3 +1,7 @@
+---
+description: 分析 Profiling 数据并提炼模型与底层性能调优经验
+---
+
 # 知识吸收: 性能调优 (Ingest Tuning)
 
 此工作流指导 Agent 从 Profiling 工具产出的性能数据、总结报告或优化讨论中提炼出干货经验。

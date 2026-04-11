@@ -19,15 +19,15 @@ git submodule add https://github.com/SamChuengDev/llm_wiki.git projects/llm_wiki
 ```
 
 **✅ 最稳健的做法：注册为全局工作流 (Global Workflows)**
-与其在主项目中建立软链接（某些基于监听的 IDE 文件系统可能会安全忽略软链），**最无缝且在任意项目中都能调用的方式**是直接将其软链接到 Antigravity IDE 的全局配置目录下：
+与其在主项目中建立软链接（经核实，Antigravity IDE 的文件扫描系统为防死循环，会**彻底忽略全部软链接**），**最无缝且在任意项目中都能调用的方式**是将源文件实体同步（Hard Copy）到全局配置目录下。
+
+为此，我们在仓库根目录提供了一键同步脚本：
 
 ```bash
-mkdir -p ~/.gemini/antigravity/global_workflows
-ln -s ~/codes/llm_wiki/.agents/workflows/ingest-bugfix.md ~/.gemini/antigravity/global_workflows/ingest-bugfix.md
-ln -s ~/codes/llm_wiki/.agents/workflows/ingest-tuning.md ~/.gemini/antigravity/global_workflows/ingest-tuning.md
-ln -s ~/codes/llm_wiki/.agents/workflows/ingest-precision.md ~/.gemini/antigravity/global_workflows/ingest-precision.md
+chmod +x sync_workflows.sh
+./sync_workflows.sh
 ```
-*执行上述命令后，无需区分所在项目，您均可随时通过 `/ingest` 斜杠命令直接唤醒图谱分析。*
+*执行上述脚本后，底层引擎会把最新的提取流推送到 `~/.gemini/antigravity/global_workflows/` 下。无需重启，轻敲 `/` 即可立刻唤醒 `Ingest Bugfix` 等命令。由于是硬拷贝，未来如果您微调了规则，需要重新执行一次该脚本。*
 
 ## 🛠️ AI Agent 交互
 
