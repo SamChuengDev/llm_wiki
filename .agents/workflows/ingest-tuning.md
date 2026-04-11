@@ -1,21 +1,20 @@
-# Ingest Tuning Experience
+# 知识吸收: 性能调优 (Ingest Tuning)
 
-This workflow directs the agent to extract performance tuning insights from raw profiling data, profiling summaries, or optimization discussions.
+此工作流指导 Agent 从 Profiling 工具产出的性能数据、总结报告或优化讨论中提炼出干货经验。
 
-1. **Context Extraction (Submodule Aware)**: 
-   - Formulate the tuning experience based on recent conversation history (the iterative optimization steps just executed by the Agent in the main workspace) OR a profiling summary in `raw/`.
-   - Guarantee you write the resulting docs into the correct `llm_wiki` submodule path.
-2. **Extract Key Metrics**: 
-   - Identify the baseline performance (e.g., token throughput, iteration time).
-   - Identify the optimized performance.
-   - Pinpoint the bottleneck (e.g., communication overhead, memory bound, compute bound).
-3. **Extract Solutions**: 
-   - Document the explicit optimization steps taken (e.g., specific environment variables adjusted like `HCCL_XXX`, operator fusion applied, memory reuse activated).
-4. **Draft Document**: 
-   - Base your formatting on `templates/tuning_template.md`.
-   - Provide a clear before/after comparison and actionable steps.
-5. **Save to Wiki**: 
-   - Save the markdown file in `wiki/03_tuning/` with a coherent name (e.g., `wiki/03_tuning/hccl_async_overlap.md`).
-6. **Update Index & Changelog**: 
-   - Add a `[[WikiLink]]` to the new guide into the `03_tuning` section of `index.md`.
-   - Add a log entry in `changelog.md`.
+1. **上下文提取 (支持 Submodule 感知)**: 
+   - 优先基于**最近的对话上下文记录**（即 Agent 刚协助完成的多轮迭代优化、性能测试跑满的日志记录）进行总结。或者读取用户指定的 `raw/` 目录下的 Profiling 文件。
+   - 务必将最后生成的沉淀文档写入到正确的 `llm_wiki` 子模块路径下。
+2. **提取核心指标**: 
+   - 明确调优前后的性能基线（如吞吐量 Token/s，或每步耗时）。
+   - 定位优化前的性能瓶颈特征（处于通信瓶颈、显存限制还是算子执行耗时）。
+3. **提取具体优化手段**: 
+   - 清晰地罗列采用了哪些确切手段（例如配置了特定的环境变量 `HCCL_XXX`，激活了算子融合，或是调整了显存复用策略）。
+4. **撰写调优文档**: 
+   - 严格按照 `templates/tuning_template.md` 格式规范进行编写。
+   - 提供直观的 "优化前/优化后" 数据对比及便于复制粘贴的执行步骤。
+5. **归档至 Wiki**: 
+   - 将生成的 Markdown 保存至 `wiki/03_tuning/` 目录下，并使用描述准确的命名（例如 `hccl_async_overlap.md`）。
+6. **更新索引与日志**: 
+   - 在 `index.md` 文件的性能调优章节追加 `[[WikiLink]]`。
+   - 同步在 `changelog.md` 中增加一次数据更新记录。

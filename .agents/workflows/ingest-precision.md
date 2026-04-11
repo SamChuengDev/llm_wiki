@@ -1,21 +1,21 @@
-# Ingest Precision Alignment
+# 知识吸收: 精度对齐 (Ingest Precision)
 
-This workflow guides the agent to document precision alignment issues like NaN occurrences, overflows, or output deviations compared to a baseline (e.g., GPU).
+此工作流用于指导 Agent 记录复杂的精度对齐问题，例如训练中途遭遇 NaN 发散、数值溢出，或是输出和基准（GPU）对不齐等异常。
 
-1. **Context Extraction (Submodule Aware)**: 
-   - Gather precision alignment context from the current Agent conversation history (iterative debug steps in the main workspace) OR a provided file in the `raw/` folder.
-   - Ensure all wiki updates are targeted to the `llm_wiki` submodule directory.
-2. **Isolate the Issue**: 
-   - Identify the specific layer/operator causing the deviation (e.g., `RMSNorm`, Attention block).
-   - Identify the precision format in use (FP16, BF16, FP32).
-3. **Extract Debug Logic & Resolution**: 
-   - Document the methodology used to trace the bug (e.g., hook-based tensor dumping, precision comparison tools).
-   - Detail the fix (e.g., enforcing FP32 for certain accumulations, adding epsilons, manually casting weights).
-4. **Draft Document**: 
-   - Base the formatting on `templates/precision_template.md`. 
-   - Ensure the workaround/solution is presented with clear before/after code blocks if applicable.
-5. **Save to Wiki**: 
-   - Save to the `wiki/02_precision/` directory with a standardized naming convention (e.g., `wiki/02_precision/rmsnorm_bf16_nan.md`).
-6. **Update Index & Changelog**: 
-   - Insert a `[[WikiLink]]` to the new guide in `index.md`.
-   - Prepend a log entry in `changelog.md`.
+1. **上下文提取 (支持 Submodule 感知)**: 
+   - 优先翻阅**当前 Agent 对话记录**（查看刚才协助完成的精度排查过程及修复差异代码）来复盘数据。如果用户指明要求，则转去提取 `raw/` 下提供的堆栈信息。
+   - 留意所有知识入库操作，都必须指派给相对的 `llm_wiki` 子模块目录。
+2. **隔离与定位分析**: 
+   - 指出产生偏差的具体特定算子或模块层（如 `RMSNorm`, Rotary Embedding 模块）。
+   - 标记当时运行的精度格式（FP16，BF16 或 FP32 等）。
+3. **提炼排查逻辑及对齐手段**: 
+   - 说明采取了哪种 debug 逻辑追踪到了问题（比如 hook 截取 dump tensor 进行相似度比对）。
+   - 详细介绍解决方案（例如针对特定的算子强制累加器上转到 FP32，或是额外增加 eps 极小值保护）。
+4. **撰写对照指南**: 
+   - 使用配套的 `templates/precision_template.md` 格式将知识落库。
+   - 如果对应了具体的代码修改，必须呈现清晰的代码替换块（Before/After对照）。
+5. **归档至 Wiki**: 
+   - 将最终的文档保存到 `wiki/02_precision/` 分类下，保证命名具备识别度（例如 `wiki/02_precision/rmsnorm_bf16_nan.md`）。
+6. **更新索引与日志**: 
+   - 将新文档通过 `[[WikiLink]]` 收录进 `index.md` 入口。
+   - 在 `changelog.md` 顶端新增一条入库日志记录。
