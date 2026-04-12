@@ -5,6 +5,19 @@
 
 ---
 
+## [2026-04-12] ingest-fact | VLM 2B5 推理服务化部署黄金配置归档
+- **来源**: `srv_dp16ep16.sh` 完整环境变量 + `xllm_client_vlm.sh` 3 轮 16 并发压测通过记录
+- **提取点 1**: 锁定黄金版本 Commit ID 三元组（主仓库 `7e680632` / xllm `2ed41d27` / xpu_gpt `82991346`），供后续回退对照。
+- **提取点 2**: 梳理 LLM 主引擎（EP16/TP1/W8A8）和 Companion ViT 引擎（16 DP/同步/frozen）的完整并行度配置。
+- **提取点 3**: 详细记录 gRPC + unix socket 通信协议的正确配置组合，标注 3 类致命错误配置及其后果。
+- **提取点 4**: 归纳服务就绪判定标准和客户端验证流程。
+
+## [2026-04-12] init | 增加 ingest-fact 工作流
+- **来源**: 用户需求
+- **提取点 1**: 增加了 `ingest-fact.md` 以用于归档系统架构、设计约束等纯事实类知识。
+- **提取点 2**: 创建了配套的 `fact_template.md` 模板。
+- **提取点 3**: 更新了 `index.md` 提供入口及事实类知识分类。
+
 ## [2026-04-12] ingest | VLM Companion Encoder gRPC 路由死锁与地址错配
 - **来源**: 测试会话日志 (`srv_dp16ep16.sh` 及 `xllm_client_vlm.sh`)
 - **提取点 1**: 剖析了因 NPU 下 Fork 环境限制导致 `veturborpc` 获取不到套接字并引发 20004 错误的死锁本质。

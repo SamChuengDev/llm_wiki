@@ -35,6 +35,10 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 - **Megatron-LM**: 昇腾适配版分析
 - **DeepSpeed**: 加速库适配
 
+### 5. [[wiki/05_fact/index|事实知识 (Facts)]]
+- [[wiki/05_fact/vlm_2b5_inference_service_golden_config|VLM 2B5 推理服务化部署黄金配置 (DP16/EP16)]]
+- 约束与设计事实 (架构隔离、Rank 配置等)
+
 ---
 
 ## ⚙️ 操作指南
@@ -43,7 +47,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 
 | 操作 | 触发方式 | 说明 |
 |------|---------|------|
-| **Ingest** | `/ingest-bugfix`, `/ingest-precision`, `/ingest-tuning` | 吸收新的原始资料，提炼为 wiki 页面 |
+| **Ingest** | `/ingest-bugfix`, `/ingest-precision`, `/ingest-tuning`, `/ingest-fact` | 吸收新的原始资料，提炼为 wiki 页面 |
 | **Query** | `/query-wiki` 或直接提问 | 基于 wiki 知识回答问题，有价值的回答回写 |
 | **Lint** | `/lint-wiki` | 健康检查：死链、孤立页、矛盾、陈旧、缺页 |
 
@@ -58,6 +62,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 
 ## 🕒 最近更新
 
+- `[2026-04-12]` 事实: [[wiki/05_fact/vlm_2b5_inference_service_golden_config|VLM 2B5 推理服务化部署黄金配置]]
 - `[2026-04-12]` 排错: [[wiki/00_bugfix/vlm_grpc_companion_routing_deadlock|VLM Companion Encoder gRPC 路由死锁与地址错配]]
 - `[2026-04-11]` 排错: [[wiki/00_bugfix/veturborpc_env_override|Pydantic 拦截与 xLLM 环境映射机制]]
 - `[2026-04-11]` 精度对齐: [[wiki/02_precision/vlm_rl_actor_blind_diff|VLM RL logprobs_diff 发散根因]]
