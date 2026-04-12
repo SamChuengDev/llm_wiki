@@ -1,3 +1,5 @@
+## [2026-04-12] ingest | Companion ViT 启动死锁与 EncodeRejected 双根因修复
+
 # Log (操作日志)
 
 所有由 AI Agent 执行的操作（Ingest / Query / Lint）均按时间倒序记录在此。

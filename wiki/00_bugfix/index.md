@@ -14,3 +14,5 @@ status: active
 ## 📖 核心文档
 
 > 暂无已沉淀文档，待 Ingest 时补充。
+
+- [[wiki/00_bugfix/companion_vit_init_deadlock_and_encode_rejected|Companion ViT 死锁 + EncodeRejected (Unix Socket URI 格式错误)]]
