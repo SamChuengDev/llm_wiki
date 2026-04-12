@@ -8,6 +8,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 ## 🏛️ 知识目录
 
 ### 0. [[wiki/00_bugfix/index|常规排错 (Bugfix)]]
+- [[wiki/00_bugfix/vlm_grpc_companion_routing_deadlock|VLM Companion Encoder gRPC 路由死锁与地址错配]]
 - [[wiki/00_bugfix/veturborpc_env_override|强行禁用 veturborpc_ext 及 xLLM 环境映射机制]]
 - 日常环境异常与框架启动报错
 - 业务逻辑层的 Bug 修复复盘与 Workaround
@@ -57,6 +58,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 
 ## 🕒 最近更新
 
+- `[2026-04-12]` 排错: [[wiki/00_bugfix/vlm_grpc_companion_routing_deadlock|VLM Companion Encoder gRPC 路由死锁与地址错配]]
 - `[2026-04-11]` 排错: [[wiki/00_bugfix/veturborpc_env_override|Pydantic 拦截与 xLLM 环境映射机制]]
 - `[2026-04-11]` 精度对齐: [[wiki/02_precision/vlm_rl_actor_blind_diff|VLM RL logprobs_diff 发散根因]]
 - `[2026-04-11]` 初始架构构建

@@ -5,6 +5,12 @@
 
 ---
 
+## [2026-04-12] ingest | VLM Companion Encoder gRPC 路由死锁与地址错配
+- **来源**: 测试会话日志 (`srv_dp16ep16.sh` 及 `xllm_client_vlm.sh`)
+- **提取点 1**: 剖析了因 NPU 下 Fork 环境限制导致 `veturborpc` 获取不到套接字并引发 20004 错误的死锁本质。
+- **提取点 2**: 完整梳理了将 Companion Encoder 切换至 `grpc` 之后发生的地址漂移与路由表格式错配冲突。
+- **提取点 3**: 记录了通过对齐服务端(`driver_proxy`)与客户端(`routing_table`)关于 `unix` Scheme 地址拼接格式来彻底根除 `EncodeRejected` 的架构层修复手法。
+
 ## [2026-04-11] ingest | xLLM 环境映射机制与 veturborpc 拦截
 - **来源**: 本地推演 (`srv_dp16ep16.sh` 及日志)
 - **提取点 1**: 追踪并记录了 `veturborpc` 报错的根本原因是单 rank 的 Companion 服务隐式继承了 Launcher 的全局 RPC 配置。
