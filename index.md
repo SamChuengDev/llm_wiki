@@ -8,6 +8,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 ## 🏛️ 知识目录
 
 ### 0. [[wiki/00_bugfix/index|常规排错 (Bugfix)]]
+- [[wiki/00_bugfix/cann_aclnngather_zero_length_crash|CANN aclnnGather 算子零长维报错与规避]]
 - [[wiki/00_bugfix/vlm_grpc_companion_routing_deadlock|VLM Companion Encoder gRPC 路由死锁与地址错配]]
 - [[wiki/00_bugfix/veturborpc_env_override|强行禁用 veturborpc_ext 及 xLLM 环境映射机制]]
 - 日常环境异常与框架启动报错
@@ -62,6 +63,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 
 ## 🕒 最近更新
 
+- `[2026-04-14]` 排错: [[wiki/00_bugfix/cann_aclnngather_zero_length_crash|CANN aclnnGather 算子零长维报错与规避]]
 - `[2026-04-12]` 事实: [[wiki/05_fact/vlm_2b5_inference_service_golden_config|VLM 2B5 推理服务化部署黄金配置]]
 - `[2026-04-12]` 排错: [[wiki/00_bugfix/vlm_grpc_companion_routing_deadlock|VLM Companion Encoder gRPC 路由死锁与地址错配]]
 - `[2026-04-11]` 排错: [[wiki/00_bugfix/veturborpc_env_override|Pydantic 拦截与 xLLM 环境映射机制]]

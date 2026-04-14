@@ -1,3 +1,4 @@
+## [2026-04-14] ingest | CANN aclnnGather 算子零长维报错与规避
 ## [2026-04-12] ingest | Companion ViT 启动死锁与 EncodeRejected 双根因修复
 
 # Log (操作日志)
