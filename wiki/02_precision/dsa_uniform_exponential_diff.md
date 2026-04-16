@@ -25,7 +25,10 @@ contradictions: []
 - **代码实现**: 目前位于 `vllm-ascend` C++ 后端。
 
 ## 4. 对齐验证 (Validation)
-- **验证手段**: 更新 vllm-ascend 解决该算子后，在 Math500 测试集的 500 道测题上，首个 token 对齐率从 73/500 大跨步跃升至 498/500。
+- **验证基准**: 利用 Math500 数据集执行精准验证。
+- **结果对比**: 
+  - 修复前：NPU(DSA-UINT32) 与 GPU 仅有 **73/500** 首Token 强制对标率。
+  - 修复后：异步推演掩盖修正将首 Token 强对标率拔升至 **498/500**，并且前序 150+ 个非决策位 token 实现严丝合缝的长跨步一致。
 
 ## 5. 关联知识
 - [[wiki/01_operators/index|Ascend NPU DSA 设计]]

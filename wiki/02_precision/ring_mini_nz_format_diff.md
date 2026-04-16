@@ -12,7 +12,10 @@ contradictions: []
 # Precision Alignment Report: NZ 数据排布导致的 Off-Policy 激化
 
 ## 1. 差异现象 (Deviation Symptoms)
-- **现象**: ring mini 模型跑到 100 步左右后，reward 开始倒下，logp diff 与 logp std 急剧抬头，接着触发长跑梯度的发散爆炸。
+- **现象**: model 推理近 100 步左右后，出现明显异常的训推不统一特征：
+  - `rollout_probs_diff_mean` 从容差逼近发散界线；
+  - `training/rollout_actor_probs_pearson_corr`（分布空间皮尔森系数）从理想的 `>99.9%` 下跌崩溃。
+  导致 reward 急剧倒下后触发满盘梯度爆炸。与标杆环境比较，GPU 在 400 步后才面临收敛天花板，且可动用 ICEPOP 从 400 托底挣扎至 1200 步；但 NPU 跑线极短。
 - **数据类型**: NZ-Format / FP32
 
 ## 2. 定位过程 (Debugging Process)
@@ -33,3 +36,4 @@ contradictions: []
 
 ## 5. 关联知识
 - [[wiki/02_precision/index|On/Off-Policy 方差分析]]
+- [[wiki/02_precision/rl_off_policy_inconsistency|训推架构 Off-Policy 异构发散诱因与对策]]

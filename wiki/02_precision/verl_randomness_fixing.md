@@ -17,8 +17,11 @@ contradictions: []
 
 ## 2. 定位过程 (Debugging Process)
 - **使用工具**: msprobe 收集整网 dump 及 plog 确定性状态查询、ray 分布式观察。
-- **可疑算子/模块**: FA (FlashAttention) 算子、Ray Actor 分布式调度系统
-- **排查逻辑**: 框架侧在 pretrain 入口设置了 `seed_all` 但 plog 显示 worker 侧 FA 算子未使用确定性实现。由于 Ray 集群在启动后环境变量为快照只读，且需要在进程创建时通过 `runtime_env` 显式覆盖。
+- **可疑算子/模块**: FA (FlashAttention) 算子、Ray Actor 分布式调度环境变量截断
+- **排查逻辑**: 
+  1. 减层到4层并拦截 `update` 输入与输出抓取前后张量 `md5sum`。发现前向一致，但反向 FA (FlashAttention) 首步数据脱轨；利用单算子测试平台确证单算子可完全固定。
+  2. 提取 NPU底层日志 `plog` (`grep "deterministic" ~/ascend/log/plog/*.log`) 确诊计算图调度侧未下发确证指示。
+  3. Ray 框架在拉起时默认继承头进程 ENV 快照，该快照一旦生成即为**只读**。因此，简单的在 `pretrain.py` 写入 `seed_all` 不会传导至 `raylet`（必须使用 `runtime_env` 显示透传覆盖），因此 Worker ( Actor 节点) 启动前未能重写随机性。
 
 ## 3. 修复方案 (Alignment Fix)
 - **方案描述**: 需要绕过入口的环境变量快照设定，直接在 Ray Worker 内（进行前反向计算的进程）执行 `seed_all` 获取彻底的硬件确定性计算。
@@ -34,3 +37,4 @@ contradictions: []
 
 ## 5. 关联知识
 - [[wiki/04_frameworks/ray_tuning|Ray 分布式框架]]
+- [[wiki/02_precision/rl_alignment_checklist|RL 精度对齐排查前置清单]]

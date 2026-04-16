@@ -17,8 +17,17 @@ contradictions: []
 
 ## 2. 定位过程 (Debugging Process)
 - **使用工具**: msprobe 采集 L0 层级结构、排查调度逻辑。
-- **可疑算子/模块**: VLLM Scheduler、KV Cache
-- **排查逻辑**: 采集缩并注入确定性，排查 L0 层信息发现第 484 token 时 Shape 不一致现象，触发异常的源头是 `input_batch.num_reqs`。这是因为剩余可用显存在调整虚拟内存开关后存在区别，致使 VLLM 内部调度器 (Scheduler) 因预测容量差异执行了不同的请求驱逐(eviction)。
+- **可疑算子/模块**: VLLM Scheduler 容量预判与驱逐 (Eviction)、KV Cache Memory Pool
+- **排查逻辑**:
+  1. 缩小至 `response_length=2k` 加速验证并锁定环境；在开启全量 `seed_all` 确定性后测试开启/关闭虚拟内存，结果出现稳定分叉。
+  2. 调动 `msprobe` 执行 L0 结构落盘 (`"task": "tensor", "level": "L0"`):
+     ```python
+     from msprobe.pytorch import PrecisionDebugger
+     debugger = PrecisionDebugger("/opt/tiger/verl/config.json")
+     # 注入至 `ModelRunner` 内进行全算子比对
+     ```
+  3. 比对序列发现从第 `484` 个 token 开始发生张量 Shape 不对偶现象：分叉根源出自调用栈中的 `input_batch.num_reqs` 计算有误。
+  4. 最终诊断：修改系统虚拟内存影响了可见物理底盘剩余容量，VLLM 内部预测模型随之分出不同路径（发生 Eviction 与非 Eviction的抉择差异），产生截断反应。
 
 ## 3. 修复方案 (Alignment Fix)
 - **方案描述**: RL rollout 由于涉及大批量的推算输出，极其依赖一致的调度队列不被截断。若要比对一致性，必须强制对齐环境上硬件暴露的剩余可用显存，消除不同驱逐分支的影响。

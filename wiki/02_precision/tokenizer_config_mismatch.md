@@ -22,7 +22,15 @@ contradictions: []
 
 ## 3. 修复方案 (Alignment Fix)
 - **方案描述**: 将 `tokenizer_config.json` 还原为与 GPU 完全一致的初始状态。
-- **代码实现**: 无需代码修改，仅替换 json 配置。
+- **排查命令参考**:
+  ```bash
+  # 1. 显式散列对比权重文件差异
+  md5sum model-00001-of-00002.safetensors
+  
+  # 2. 文件夹/配置级别全面对比
+  diff -r npu_model_dir/ gpu_model_dir/
+  ```
+- **配置防范**: 重点保证配置中的 `chat_template` 字段未经人为剪裁（特别是控制思维链逻辑开关和结构树格式相关的逻辑）。
 
 ## 4. 对齐验证 (Validation)
 - **验证手段**: 推理恢复 think 过程，模型 reward 与 response length 基本对齐。

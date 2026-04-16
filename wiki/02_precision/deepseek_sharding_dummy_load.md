@@ -21,8 +21,23 @@ contradictions: []
 - **排查逻辑**: 确定 `dummy` 下非 MLA 模型皆可正常载入；进而逐行追踪前向 `kv_b` 的运算与 Sharding 更新逻辑，最终发现在参数分割后 `W_UV` 等通过 `.view` 切割所得的数据地址发生变化从源头脱轨，导致更新引擎给老权重做 inplace 操作时，脱钩的这批 `W_UV` 张量保留了假权重的初始噪音。
 
 ## 3. 修复方案 (Alignment Fix)
-- **方案描述**: 加载与 Sharding 完成后直接追加一层强制的全量参数映射重建 （通过 `process_weights_after_loading`），并摒弃有隐患的 `view()` / `.contiguous()` 割裂操作以贴近 GPU 同等运行姿态。
-- **代码实现**: 已合并进入 verl 的 Actor-Engine 权重覆写模块中。
+- **方案描述**:
+  1. 在 `verl/workers/rollout/vllm_rollout/vllm_rollout_spmd.py` 对假权重执行覆写强灌操作。加入 `process_weights_after_loading` 接力，打破原先对 `in-place` 覆写的完全依赖。
+  2. 修复产生指针解耦现象的 `view()` 并摒弃损害连续性的 `.contiguous()`，强行与 GPU 执行同一组切分方式。
+- **特征调试模块** (`CompareWeight` 打桩器，用于甄别新 Sharding 污染范围):
+  ```python
+  class CompareWeight:
+      @staticmethod
+      def dump_CustomDeepseekV2DecoderLayer(path_for_save: Path, layer):
+          # Dump 当前层中切分敏感权重
+          dict_tensor = {
+              "self_attn.mla_attn.impl.W_UV": layer.self_attn.mla_attn.impl.W_UV,
+              "self_attn.mla_attn.impl.W_UK_T": layer.self_attn.mla_attn.impl.W_UK_T
+          }
+          for name, param in dict_tensor.items():
+              torch.save(param.cpu(), path_for_save.joinpath(f"{name}.pt"))
+  ```
+  在落盘比对时：若 `safetensors` 分支吐字正常，而 `dummy` 分支提取的数据（基于纯净随机数据再覆盖）存在差异，即实锤证明 Sharding 指针有漏网之鱼。
 
 ## 4. 对齐验证 (Validation)
 - **验证手段**: 运行 `dummy` 模式的 MLA 成功吐字。

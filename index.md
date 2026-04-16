@@ -20,6 +20,15 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 - `torch_npu` 特有算子库
 
 ### 2. [[wiki/02_precision/index|精度对齐 (Precision)]]
+
+**📚 诊断方法论与工具向导 (Methodology & Tools)**
+- [[wiki/02_precision/rl_precision_metrics_guide|RL 核心监控指标解析]]
+- [[wiki/02_precision/rl_alignment_checklist|RL 精度对齐排查前置清单 (Golden Checklist)]]
+- [[wiki/02_precision/rl_troubleshooting_workflow|五阶段大盘定位排查主流程 (Workflow)]]
+- [[wiki/02_precision/rl_off_policy_inconsistency|训推架构 Off-Policy 异构发散诱因与对策]]
+- [[wiki/02_precision/rl_debug_tools_guide|NPU 框架级调试工具与探针指南 (Tools)]]
+
+**🐛 实战排查案例 (Case Studies)**
 - [[wiki/02_precision/tokenizer_config_mismatch|tokenizer_config 未对齐导致 response 异常]]
 - [[wiki/02_precision/rmsnorm_eps_mismatch_reward|RMSNorm 超参 eps 未对齐导致 reward 下降]]
 - [[wiki/02_precision/verl_randomness_fixing|Ray 多进程下 VeRL 确定性无法透传问题]]
@@ -30,9 +39,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 - [[wiki/02_precision/ring_mini_nz_format_diff|NZ 数据排布导致的 Off-Policy 激化]]
 - [[wiki/02_precision/tensordict_async_memory_stomp|Tensordict缺原生NPU支持导致异步显存重叠复制]]
 - [[wiki/02_precision/vlm_rl_actor_blind_diff|VLM RL 架构级概率不一致发散 (XLLM -100 Token 丢失)]]
-- FP16/BF16 溢出排查
-- NaN/Inf 问题诊断
-- 逐层结果对齐工具与方法
+- [[wiki/02_precision/vlm_2b5_w8a8_gibberish|VLM 2.5B W8A8 推理高熵乱码问题 (RoPE 冲突)]]
 
 ### 3. [[wiki/03_tuning/index|性能调优 (Tuning)]]
 - HCCL 并发与通信优化

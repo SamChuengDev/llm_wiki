@@ -17,8 +17,17 @@ contradictions: []
 
 ## 2. 定位过程 (Debugging Process)
 - **使用工具**: 替换权重推理对比，在 rollout 打桩并使用 hook 截取 dump tensor 打印对比。
-- **可疑算子/模块**: `RMSNorm`
-- **排查逻辑**: 使用相同权重离线评测推理一致，说明是训练侧精度问题。排查前反向精度，发现经过 Layernorm 后 dump 结果发生差异。追溯发现 `mindspeed-rl` 的 `rms_norm_eps` 默认值(1e-6)与客户(1e-7)不同。
+- **可疑算子/模块**: `RMSNorm` (`mindspeed-rl` 默认超参与 HuggingFace 参数错配)
+- **排查逻辑**: 
+  1. 使用相同权重在 GPU 与 NPU 上跑离线评测脚本，推理一致，锁定训练侧框架。
+  2. 利用 PyTorch 标准 Hook (`register_forward_hook`) 在 rollout 之后拦截：
+     ```python
+     def hook_fn(module, input, output):
+         torch.save(output.cpu(), f"/tmp/dump_{module.__class__.__name__}.pt")
+     model.model.layers[0].input_layernorm.register_forward_hook(hook_fn)
+     ```
+  3. 分析各算子 Dump 数值，发现在 Layernorm 后产出差异。
+  4. 对比组件代码：`mindspeed-rl` 的 `rms_norm_eps` 默认值未设置时采用硬编码 `1e-6`，而本次实验客户基础模型 (HuggingFace) 初始默认为 `1e-7`，由于超参极小尺度的偏移引发百步后的奖励崩塌。
 
 ## 3. 修复方案 (Alignment Fix)
 - **方案描述**: 手工在 `yaml` 配置中将 `rms_norm_eps` 指定设定为与基线一致的 1e-7。
