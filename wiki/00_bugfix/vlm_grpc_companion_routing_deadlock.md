@@ -69,3 +69,4 @@ export XLLM_DRIVER_ENCODER_ROUTING_CONFIG__ROUTING_TABLE_UPDATER_CONFIG__REMOTE_
 
 ## 5. 沉淀与关联
 - 关联问题: 分布式 RPC 联调、`veturborpc` Fork 限制规避。
+- [[wiki/05_fact/vlm_2b5_inference_service_golden_config|关联配置: VLM 2B5 推理服务化部署黄金配置]]

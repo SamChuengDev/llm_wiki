@@ -2,6 +2,7 @@
 title: CANN aclnnGather (EZ1001) 算子零长维报错与规避
 tags: [npu, cann, gather, operator, OOM]
 last_updated: "2026-04-14"
+source: "unknown"
 confidence: 5
 status: "verified"
 ---

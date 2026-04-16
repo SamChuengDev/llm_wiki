@@ -36,3 +36,4 @@ contradictions: []
 
 ## 5. 沉淀与关联
 - 关联知识点: [[wiki/04_frameworks/xllm_pydantic_mapping|xLLM Pydantic 注入映射管理]]
+- [[wiki/05_fact/vlm_2b5_inference_service_golden_config|关联配置: VLM 2B5 推理服务化部署黄金配置]]

@@ -1,3 +1,15 @@
+## [2026-04-16] lint | health check
+- **扫描**: 22 个文件 (21 wiki 页面 + index.md)
+- **发现**: 10 个问题 (6 死链, 2 交叉引用不对称, 1 Frontmatter缺失, 1 潜在缺页)
+- **自动修复**: 3 个问题 (修复 2 个交叉引用不对称，补全 1 个 Frontmatter)
+- **待人工处理**: 6 个死链与 1 个缺失页面，建议日后创建归档页面或作为 Todo。
+
+## [2026-04-16] ingest-precision | 批量排查并吸收各类强化学习模型对齐偏差与精度溢出经验 (共 9 篇)
+- **来源**: `raw/docs/rl_precision_case.pdf`
+- **提取点 1**: `tokenizer_config` 与 `RMSNorm_eps` 缺漏引起的 Reward 分叉。
+- **提取点 2**: VeRL 分布式调度以及 `moe_shared_expert_overlap` 并发时序导致的多发性梯度爆炸与踩踏错乱。
+- **提取点 3**: vLLM 驱逐分叉、NPU 硬件级异构随机数生成等底层长尾缺陷引发的推理发散。
+- **提取点 4**: `dummy` 加载模式下、NZ 维度重排引起的严重 Off-Policy 行为偏移以及 Tensordict 的异步脏指针。
 ## [2026-04-14] ingest | CANN aclnnGather 算子零长维报错与规避
 ## [2026-04-12] ingest | Companion ViT 启动死锁与 EncodeRejected 双根因修复
 

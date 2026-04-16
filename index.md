@@ -20,6 +20,15 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 - `torch_npu` 特有算子库
 
 ### 2. [[wiki/02_precision/index|精度对齐 (Precision)]]
+- [[wiki/02_precision/tokenizer_config_mismatch|tokenizer_config 未对齐导致 response 异常]]
+- [[wiki/02_precision/rmsnorm_eps_mismatch_reward|RMSNorm 超参 eps 未对齐导致 reward 下降]]
+- [[wiki/02_precision/verl_randomness_fixing|Ray 多进程下 VeRL 确定性无法透传问题]]
+- [[wiki/02_precision/moe_shared_expert_overlap_grad|MOE Shared Expert Overlap 多流内存踩踏与梯度爆炸]]
+- [[wiki/02_precision/vllm_virtual_memory_eviction|VLLM 显存不一致导致驱逐机制分叉]]
+- [[wiki/02_precision/dsa_uniform_exponential_diff|NPU 硬件随机数实现异构导致的分布偏差]]
+- [[wiki/02_precision/deepseek_sharding_dummy_load|Deepseek dummy 初始化的 Sharding 脱序]]
+- [[wiki/02_precision/ring_mini_nz_format_diff|NZ 数据排布导致的 Off-Policy 激化]]
+- [[wiki/02_precision/tensordict_async_memory_stomp|Tensordict缺原生NPU支持导致异步显存重叠复制]]
 - [[wiki/02_precision/vlm_rl_actor_blind_diff|VLM RL 架构级概率不一致发散 (XLLM -100 Token 丢失)]]
 - FP16/BF16 溢出排查
 - NaN/Inf 问题诊断
