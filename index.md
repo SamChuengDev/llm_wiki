@@ -40,7 +40,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 - [[wiki/02_precision/tensordict_async_memory_stomp|Tensordict缺原生NPU支持导致异步显存重叠复制]]
 - [[wiki/02_precision/vlm_rl_actor_blind_diff|VLM RL 架构级概率不一致发散 (XLLM -100 Token 丢失)]]
 - [[wiki/02_precision/vlm_2b5_w8a8_gibberish|VLM 2.5B W8A8 推理高熵乱码问题 (RoPE 冲突)]]
-
+- [[wiki/02_precision/vlm_rl_actor_rope_logprobs_diff|VLM RL 长序列 RoPE 偏移导致 logprobs_diff 发散 (400x vs 20x)]]
 ### 3. [[wiki/03_tuning/index|性能调优 (Tuning)]]
 - HCCL 并发与通信优化
 - 显存复用与 OOM 解决
@@ -54,6 +54,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 
 ### 5. [[wiki/05_fact/index|事实知识 (Facts)]]
 - [[wiki/05_fact/vlm_2b5_inference_service_golden_config|VLM 2B5 推理服务化部署黄金配置 (DP16/EP16)]]
+- [[wiki/05_fact/vlm_2b5_rl_rollout_quantization|VLM 2.5B RL 训推转换低精度 Rollout 量化实现 (D_W8A8C8)]]
 - 约束与设计事实 (架构隔离、Rank 配置等)
 
 ---

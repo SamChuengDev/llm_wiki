@@ -44,3 +44,4 @@ contradictions: []
 
 ## 5. 关联知识
 - [[wiki/02_precision/rl_troubleshooting_workflow|五阶段大盘定位排查主流程 (Workflow)]]
+- [[wiki/02_precision/vlm_rl_actor_rope_logprobs_diff|VLM RL 长序列 RoPE 偏移导致 logprobs_diff 发散]]

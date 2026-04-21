@@ -41,3 +41,5 @@ contradictions: []
 
 ## 5. 关联知识
 - [[wiki/05_fact/vlm_2b5_inference_service_golden_config|VLM 2.5B 推理黄金配置]]
+- [[wiki/02_precision/vlm_rl_actor_rope_logprobs_diff|VLM RL 长序列 RoPE 偏移导致 logprobs_diff 发散]]
+- [[wiki/05_fact/vlm_2b5_rl_rollout_quantization|VLM 2.5B RL 训推转换低精度 Rollout 量化实现 (D_W8A8C8)]]

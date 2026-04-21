@@ -33,6 +33,25 @@
 
 ---
 
+## [2026-04-21] lint | health check
+- **扫描**: 31 个页面 (包含所有分类目录与模板)
+- **发现**: 14 个死链 (大抵为早期规划好的未来分类索引节点或暂未成文的主题), 3 对交叉引用不对称
+- **自动修复**: 3 个问题 (补全了 `vlm_rl_actor_rope_logprobs_diff.md` 及 `vlm_2b5_rl_rollout_quantization.md` 相关的双向反演引用链接)
+- **待人工处理**: 14 个待建设页面 (如 `vllm_npu.md`, `xllm_pydantic_mapping.md` 等占位符)
+
+## [2026-04-21] ingest-fact | VLM 2.5B RL 低精度 Rollout 量化实现 (D_W8A8C8)
+- **来源**: Agent 推断与底座代码解析 (`linear_dy_w8a8.py` 和 `quant_conf.py`)
+- **提取点 1**: 确定了系统采用 SmoothQuant 加上 Dynamic W8A8 (D_W8A8C8) 的架构设计。
+- **提取点 2**: 解析了权重 (Weight) 是离线静态且 Per-Channel 量化的。
+- **提取点 3**: 解析了激活 (Activation) 是包含静态平滑因子预处理的在线动态量化，且提取极值粒度为 Per-Token。
+- **提取点 4**: 补全了底层利用 `xpu_ops.smooth_quant` 现场换算与截断的核心代码实现。
+
+## [2026-04-21] ingest-precision | VLM RL 长序列 RoPE 偏移导致 logprobs_diff 发散 (400x vs 20x)
+- **来源**: Agent 推理会话及 `2b5_llm_0.1_logpdiff.md`
+- **提取点 1**: 确定了 `logprobs_diff` 在长序列上误差飙升的规律，直接定位到底层物理位移的 RoPE 放缩误差。
+- **提取点 2**: 揭示了 `ModelSpec` 隐式优先加载 `cruise_cli.yaml` 导致 `rope_scale=400` 残留的幽灵架构坑。
+- **提取点 3**: 提炼出在不破坏 Actor (BF16) 训练回传机制的前提下，使用 Python 热补丁外科手术式改写 NPU 远程参数的设计方案。
+
 ## [2026-04-12] ingest-fact | VLM 2B5 推理服务化部署黄金配置归档
 - **来源**: `srv_dp16ep16.sh` 完整环境变量 + `xllm_client_vlm.sh` 3 轮 16 并发压测通过记录
 - **提取点 1**: 锁定黄金版本 Commit ID 三元组（主仓库 `7e680632` / xllm `2ed41d27` / xpu_gpt `82991346`），供后续回退对照。
