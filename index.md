@@ -8,6 +8,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 ## 🏛️ 知识目录
 
 ### 0. [[wiki/00_bugfix/index|常规排错 (Bugfix)]]
+- [[wiki/00_bugfix/vlm_companion_vit_rpc_crash|Bugfix: VLM Companion ViT RPC 连接失败与环境变量断层]]
 - [[wiki/00_bugfix/cann_aclnngather_zero_length_crash|CANN aclnnGather 算子零长维报错与规避]]
 - [[wiki/00_bugfix/vlm_grpc_companion_routing_deadlock|VLM Companion Encoder gRPC 路由死锁与地址错配]]
 - [[wiki/00_bugfix/veturborpc_env_override|强行禁用 veturborpc_ext 及 xLLM 环境映射机制]]
