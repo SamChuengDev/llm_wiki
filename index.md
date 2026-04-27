@@ -58,6 +58,7 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 - [[wiki/05_fact/vlm_2b5_vit_llm_deployment_architecture|Fact: VLM 2B5 VIT与LLM的混合部署架构约束]]
 - [[wiki/05_fact/vlm_2b5_inference_service_golden_config|VLM 2B5 推理服务化部署黄金配置 (DP16/EP16)]]
 - [[wiki/05_fact/vlm_2b5_rl_rollout_quantization|VLM 2.5B RL 训推转换低精度 Rollout 量化实现 (D_W8A8C8)]]
+- [[wiki/05_fact/vlm_2b5_rl_rollout_timing|Fact: VLM 2.5B RL NPU Rollout 阶段的真实耗时约束]]
 - 约束与设计事实 (架构隔离、Rank 配置等)
 
 ---
