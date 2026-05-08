@@ -8,6 +8,8 @@ LLM 在执行 Query 时应首先读取本文件定位相关页面。
 ## 🏛️ 知识目录
 
 ### 0. [[wiki/00_bugfix/index|常规排错 (Bugfix)]]
+- [[wiki/00_bugfix/pytorch_to_empty_libc_leak_and_precision|Bugfix: PyTorch to_empty() 精度丢失与 libc 碎片化泄漏连环坑]]
+- [[wiki/00_bugfix/npu_empty_virt_addr_cache_oom|Bugfix: empty_virt_addr_cache 导致 NPU 物理显存泄露引发 OOM]]
 - [[wiki/00_bugfix/oom_moe_dispatch|Bugfix: OOM 导致 MoeDistributeDispatchV2 算子死锁与集群崩溃]]
 - [[wiki/00_bugfix/vlm_companion_vit_rpc_crash|Bugfix: VLM Companion ViT RPC 连接失败与环境变量断层]]
 - [[wiki/00_bugfix/cann_aclnngather_zero_length_crash|CANN aclnnGather 算子零长维报错与规避]]

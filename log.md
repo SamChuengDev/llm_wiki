@@ -1,3 +1,15 @@
+## [2026-05-08] ingest-bugfix | PyTorch to_empty() 精度丢失与 libc 碎片化泄漏连环坑
+- **来源**: Agent 推断与诊断会话上下文 (vlm_0508_190211.log)
+- **提取点 1**: 确定了 `to('cpu')` 及模型重实例化在 CPU 上引发的 2GB/step 的 `libc` Arena 碎片化硬泄露问题，这会引发 Host 端的 OOM。
+- **提取点 2**: 指出了 PyTorch 的 `load_state_dict` 机制会隐式跳过 `persistent=False` 的 buffer（如 ViT 的 `inv_freq`），在使用 `to_empty` 时会导致模型特征陷入完全的未初始化内存乱码状态，引起 RL 的 `logprobs_diff` 发散。
+- **提取点 3**: 提炼了零 CPU 内存开辟 (`to('meta')` + `to_empty`) 配合通过 `named_buffers()` 进行底层强行内存覆盖来达成既不泄漏也不丢精度的最终修复范式。
+
+## [2026-05-06] ingest-bugfix | empty_virt_addr_cache 导致 NPU 物理显存泄露引发 OOM
+- **来源**: Agent 推断与诊断会话上下文 (vlm_0506_201101.log, oom_leak_0429_2237.md)
+- **提取点 1**: 确定了在开启 `expandable_segments` 特性后，`empty_virt_addr_cache` 仅解绑虚拟地址而不释放物理块到系统底层的特性机制。
+- **提取点 2**: 指出了多进程架构下（Rollout EngineWorker 与 ActorWorker），仅使用 `empty_virt_addr_cache` 会导致跨进程显存死锁并引发 ActorWorker OOM 的根因。
+- **提取点 3**: 提炼了在代码底层追加 `empty_cache()` 以强制清空进程内部 PyTorch 物理缓存池从而交还驱动层的终极修复方案。
+
 ## [2026-04-22] ingest-fact | VLM 2B5 VIT与LLM的混合部署架构约束
 - **来源**: Agent 推断与诊断会话上下文 (vlm_0422_142434.log / srv_dp16ep16.sh)
 - **提取点 1**: 确定了主引擎 (LLM) 和伴随引擎 (ViT Encoder) 并发架构与显存物理隔离机制。
