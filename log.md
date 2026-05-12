@@ -1,3 +1,9 @@
+## [2026-05-09] ingest-bugfix | 宿主机 OOM 与 SYS 物理内存持续增长 (glibc malloc arena 碎片化)
+- **来源**: Agent 推断与诊断会话上下文 (vlm_0508_190211.log)
+- **提取点 1**: 确定了导致 150GB+ 物理内存黑洞的主因是 glibc 在 33+ 个并发 Python 进程下产生的 malloc arena 碎片化。
+- **提取点 2**: 明确了通过设置 `MALLOC_ARENA_MAX=2` 限制多线程内存池扩张，从根本上压制 C 运行时内存冗余的解决方案。
+- **提取点 3**: 总结了清理冗余引用 (`clear_stale_entries` 与 `del mb`) 以及砍掉过度并发的后台进程 (`SERVER_PROCS=16`) 的综合排雷行动。
+
 ## [2026-05-08] ingest-bugfix | PyTorch to_empty() 精度丢失与 libc 碎片化泄漏连环坑
 - **来源**: Agent 推断与诊断会话上下文 (vlm_0508_190211.log)
 - **提取点 1**: 确定了 `to('cpu')` 及模型重实例化在 CPU 上引发的 2GB/step 的 `libc` Arena 碎片化硬泄露问题，这会引发 Host 端的 OOM。
